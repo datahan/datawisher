@@ -1,14 +1,24 @@
 package com.datawisher.common;
 
+import com.datawisher.common.dao.MyDao;
 import com.datawisher.common.service.MyService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.LinkedList;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LocalTests {
+
+    @InjectMocks
+    private MyService myService;
 
     @Test
     public void method1() {

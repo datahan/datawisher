@@ -33,7 +33,7 @@ public class JxlsUtils{
         Map<String, Object> funcs = new HashMap<>(1);
 
         //添加自定义功能
-        funcs.put("utils", new JxlsUtils());
+        funcs.put("util", new JxlsUtils());
         evaluator.getJexlEngine().setFunctions(funcs);
         jxlsHelper.processTemplate(context, transformer);
 	}

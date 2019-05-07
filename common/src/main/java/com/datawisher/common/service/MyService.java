@@ -1,5 +1,7 @@
 package com.datawisher.common.service;
 
+import com.datawisher.common.dao.MyDao;
+
 public class MyService {
 
     public String foo() {
