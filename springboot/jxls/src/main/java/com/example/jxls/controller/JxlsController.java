@@ -66,8 +66,11 @@ public class JxlsController {
     public ResponseEntity<byte[]> export2(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //模拟数据
         Settlement settlement = new Settlement("333", "444");
+        Settlement settlement2 = new Settlement("123", "456");
+
         List<Settlement> settlements = new ArrayList<>();
         settlements.add(settlement);
+        settlements.add(settlement2);
         Map<String, Object> beanParams = new HashMap<>(1);
         beanParams.put("list", settlements);
         //下载表格
