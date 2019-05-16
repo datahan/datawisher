@@ -55,4 +55,25 @@ public class LocalTests {
             Assert.assertEquals("foo null", foo);
         }
     }
+
+    @Test
+    public void method3() {
+        Boolean bt = Boolean.TRUE;
+        Boolean bf = Boolean.FALSE;
+        boolean t = true;
+        boolean f = false;
+
+        if (bt) {
+            System.out.println("Boolean true");
+        }
+        if (bf) {
+            System.out.println("Boolean false");
+        }
+        if (t) {
+            System.out.println("boolean true");
+        }
+        if (f) {
+            System.out.println("boolean false");
+        }
+    }
 }

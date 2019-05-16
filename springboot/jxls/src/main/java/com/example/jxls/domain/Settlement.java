@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 
+
+/**
+ * @author HJ
+ * @date 2019/1/1
+ */
 public class Settlement implements Serializable {
 
     private static final long serialVersionUID = -4952229035106204020L;
