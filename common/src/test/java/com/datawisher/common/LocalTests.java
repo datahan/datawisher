@@ -1,16 +1,20 @@
 package com.datawisher.common;
 
-import com.datawisher.common.dao.MyDao;
 import com.datawisher.common.service.MyService;
+import com.fasterxml.jackson.core.FormatSchema;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.LinkedList;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.mockito.Mockito.*;
 
@@ -21,7 +25,7 @@ public class LocalTests {
     private MyService myService;
 
     @Test
-    public void method1() {
+    public void testMockito() {
 
         //You can mock concrete classes, not just interfaces
         LinkedList mockedList = mock(LinkedList.class);
@@ -46,7 +50,7 @@ public class LocalTests {
     }
 
     @Test
-    public void method2() {
+    public void testAssert() {
         MyService myService = new MyService();
         String foo = myService.foo();
         if ("foo one".equals(foo)) {
@@ -57,7 +61,7 @@ public class LocalTests {
     }
 
     @Test
-    public void method3() {
+    public void testBooleanType() {
         Boolean bt = Boolean.TRUE;
         Boolean bf = Boolean.FALSE;
         boolean t = true;
@@ -75,5 +79,46 @@ public class LocalTests {
         if (f) {
             System.out.println("boolean false");
         }
+    }
+
+    @Test
+    public void testMap() throws JsonProcessingException {
+
+        Map<String,String> map = new HashMap<String,String>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        map.put("b", "b");
+        map.put("a", "a");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        map.put("occurTime", sdf.format(new Date()));
+        System.out.println("print map: " + map);
+        String jsonStr = objectMapper.writeValueAsString(map);
+        System.out.println("print json: " + jsonStr);
+    }
+
+    @Test
+    public void testBigDecimal() {
+        BigDecimal db1 = BigDecimal.valueOf(12.34567);
+        System.out.println(db1);
+        String s = String.valueOf(db1);
+        System.out.println(s);
+    }
+
+    @Test
+    public void testFor() {
+        StringBuffer sb = new StringBuffer();
+        List<String> list = new LinkedList<>();
+        list.add("abc");
+        list.add("efg");
+        list.add("hij");
+        list.add("klm");
+        list.add("nop");
+        list.add("qrs");
+        list.add("tuv");
+
+        for (String str : list) {
+            sb.append(str);
+            System.out.println(str);
+        }
+
     }
 }
