@@ -1,14 +1,11 @@
 package com.example.jxls.controller;
 
 import com.example.jxls.domain.Settlement;
-import com.example.jxls.service.JxlsService;
 import com.example.jxls.util.ExcelUtil;
 import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +19,6 @@ import java.util.Map;
 
 @RestController
 public class JxlsController {
-
-    @Autowired
-    private JxlsService jxlsService;
 
     @RequestMapping("/export")
     public void export(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
@@ -63,7 +57,7 @@ public class JxlsController {
     }
 
     @RequestMapping("/export2")
-    public ResponseEntity<byte[]> export2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ResponseEntity<byte[]> export2() throws Exception {
         //模拟数据
         Settlement settlement = new Settlement("333", "444");
         Settlement settlement2 = new Settlement("123", "456");
@@ -73,6 +67,7 @@ public class JxlsController {
         settlements.add(settlement2);
         Map<String, Object> beanParams = new HashMap<>(1);
         beanParams.put("list", settlements);
+
         //下载表格
         String downloadFilename = "下载的文件files.xlsx";
         return ExcelUtil.downLoadExcel("templ.xlsx",beanParams, downloadFilename);
