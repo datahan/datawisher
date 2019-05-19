@@ -1,0 +1,1 @@
+Try-with-resources是java7中一个新的异常处理机制，它能够很容易地关闭在try-catch语句块中使用的资源。
