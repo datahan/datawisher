@@ -1,5 +1,6 @@
 package com.datawisher.common;
 
+import com.datawisher.common.mockito.bean.Stock;
 import com.datawisher.common.service.MyService;
 import com.fasterxml.jackson.core.FormatSchema;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.*;
 
@@ -64,6 +66,7 @@ public class LocalTests {
     public void testBooleanType() {
         Boolean bt = Boolean.TRUE;
         Boolean bf = Boolean.FALSE;
+        Boolean empty = null;
         boolean t = true;
         boolean f = false;
 
@@ -121,4 +124,85 @@ public class LocalTests {
         }
 
     }
+
+    @Test
+    public void testEquals() {
+        int b = 1;
+        Integer i = 1;
+
+        if (i.equals(b)) {
+            System.out.println("pass");
+        }
+    }
+
+    @Test
+    public void testListStream() {
+        List<String> s1 = new ArrayList<>();
+        List<String> s2 = new ArrayList<>();
+        List<String> collect = null;
+
+        s1.add("1");
+        s1.add("3");
+        s1.add("2");
+
+        s2.add("1");
+        s2.add("2");
+        s2.add("3");
+        s2.add("4");
+        s2.add("5");
+        s2.add("6");
+
+        collect = s2;
+        for (String a : s1) {
+            collect=collect.stream().filter(x -> !x.equals(a)).collect(Collectors.toList());
+        }
+        System.out.println(collect);
+    }
+
+    @Test
+    public void testListClone() {
+
+        List<String> s1 = new ArrayList<>();
+        List<String> s2 = new ArrayList<>();
+        List<String> collect = new ArrayList<>();
+        s1.add("1");
+        s1.add("3");
+        s1.add("2");
+
+        s2.add("1");
+        s2.add("2");
+        s2.add("3");
+        s2.add("4");
+        s2.add("5");
+        s2.add("6");
+
+        collect.addAll(s1);
+        collect.add("x");
+        System.out.println(collect);
+        System.out.println(s1);
+    }
+
+    @Test
+    public void testTryCatch() {
+
+        int i = 0;
+
+        try {
+            i = i + 1;
+            i = 1/0;
+        } catch (Exception e) {
+            System.out.println(i);
+            throw new RuntimeException("aaa", e);
+        }
+        i = i + 2;
+        System.out.println(i);
+    }
+
+    @Test
+    public void testListNull() {
+        List<Stock> list = new ArrayList<>();
+        System.out.println(list);
+
+    }
+
 }
