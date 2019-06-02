@@ -11,9 +11,9 @@ public class Result<T> implements Serializable {
      */
     private Boolean success=true;
     /**
-     * 响应状态 200:成功 其他:失败
+     * 响应状态 1000:成功 其他:失败
      */
-    private Integer returnCode=200;
+    private Integer returnCode=1000;
     /**
      * 响应结果
      */

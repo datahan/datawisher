@@ -26,7 +26,7 @@ public class LoggerAdvice {
 	@Before("within(com.datawisher..*) && @annotation(logCut)")
 	public void addBeforeLogger(JoinPoint joinPoint, LoggerCut logCut) {
 		if(log.isInfoEnabled()){
-			log.info("执行 {} 方法开始, 传参：{}", logCut.value(), JSONUtils.object2Json(joinPoint.getArgs()));
+			log.info("{} 方法执行, 传参值：{}", logCut.value(), JSONUtils.object2Json(joinPoint.getArgs()));
 			log.info("方法路径：{}", joinPoint.getSignature());
 		}
 	}
@@ -34,14 +34,14 @@ public class LoggerAdvice {
 	@AfterReturning(value = "within(com.datawisher..*) && @annotation(logCut)",returning = "result")
 	public void addAfterReturningLogger(JoinPoint joinPoint, LoggerCut logCut,Object result) {
 		if(log.isInfoEnabled()){
-			log.info("执行 {} 方法结束, 返回值：{}", logCut.value(), JSONUtils.object2Json(result));
+			log.info("{} 方法结束, 返回值：{}", logCut.value(), JSONUtils.object2Json(result));
 		}
 	}
 	
 	@AfterThrowing(pointcut = "within(com.datawisher..*) && @annotation(logCut)", throwing = "ex")
 	public void addAfterThrowingLogger(JoinPoint joinPoint, LoggerCut logCut, Exception ex) {
 		if(log.isInfoEnabled()){
-			log.error("执行 {} 方法异常", logCut.value(), ex);
+			log.error("{} 方法异常", logCut.value(), ex);
 		}
 	}
 
