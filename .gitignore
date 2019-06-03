@@ -6,3 +6,5 @@
 *.iws
 *.iml
 *.ipr
+.gitignore
+WebContent/WEB-INF/
