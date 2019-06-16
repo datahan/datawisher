@@ -34,6 +34,6 @@ public class JavaPromise {
         //采用lambada的实现方式
         future.thenAccept(e -> System.out.println(e + " ok"));
 
-        System.out.println("main thread is running");
+        System.out.println("main threadproject is running");
     }
 }

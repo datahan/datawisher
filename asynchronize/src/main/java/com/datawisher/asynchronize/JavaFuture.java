@@ -28,6 +28,6 @@ public class JavaFuture {
 
         //此处阻塞main线程
         System.out.println(f.get());
-        System.out.println("main thread is blocked");
+        System.out.println("main threadproject is blocked");
     }
 }

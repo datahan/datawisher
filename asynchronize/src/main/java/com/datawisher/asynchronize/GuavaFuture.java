@@ -47,6 +47,6 @@ public class GuavaFuture {
         });
 
         //主线程可以继续做其他的工作
-        System.out.println("main thread is running");
+        System.out.println("main threadproject is running");
     }
 }
