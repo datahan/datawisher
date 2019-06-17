@@ -24,7 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerVO, customer);
-        customerRepository.save(customer);
+        // 不论是否回滚，记录已被flush到数据库中
+        customerRepository.saveAndFlush(customer);
 
         Customer customer1 = new Customer();
         BeanUtils.copyProperties(customerVO, customer1);

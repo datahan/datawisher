@@ -1,5 +1,6 @@
 package com.datawisher.common;
 
+import com.datawisher.common.base.bean.Result;
 import com.datawisher.common.mockito.bean.Stock;
 import com.datawisher.common.service.MyService;
 import com.fasterxml.jackson.core.FormatSchema;
@@ -205,4 +206,23 @@ public class LocalTests {
 
     }
 
+    @Test
+    public void testNewInstance(){
+        Result<String> stringResult = new Result<>();
+        System.out.println(stringResult);
+
+        Result<String> stringResult1 = null;
+        System.out.println(stringResult1);
+    }
+
+    @Test
+    public void testIndexOf() {
+        List<String> strs = new LinkedList<>();
+        strs.add("123");
+        strs.add("888");
+
+        int i = strs.indexOf("85");
+        System.out.println(i + "====");
+
+    }
 }

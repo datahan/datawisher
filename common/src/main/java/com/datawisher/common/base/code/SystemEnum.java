@@ -8,6 +8,8 @@ import lombok.Getter;
 public enum SystemEnum {
 
     /** 基础模块及系统相关 **/
+    SUCCESS_FLAG(1, "成功"),
+    FAILURE_FLAG(2, "失败"),
 
     /** 请求参数校验通过 */
     REQUEST_PARAM_SUCCESS(1000, "请求参数校验通过"),
