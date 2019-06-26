@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * @author Jim
  */
@@ -33,6 +35,18 @@ public class CustomerServiceImpl implements CustomerService {
         float i = 1/0;
         customerRepository.save(customer1);
 
+        return 1;
+    }
+
+    @Override
+    public int updateCustomer(CustomerVO customerVO) {
+        Optional<Customer> customerOptional =
+                customerRepository.findById(customerVO.getId());
+        if (customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            customer.setName(customerVO.getName());
+            customer.setAge(customerVO.getAge());
+        }
         return 1;
     }
 }
