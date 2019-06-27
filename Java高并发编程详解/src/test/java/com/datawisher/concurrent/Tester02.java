@@ -2,6 +2,9 @@ package com.datawisher.concurrent;
 
 import java.util.stream.IntStream;
 
+/**
+ * 命名线程
+ */
 public class Tester02 {
 
     private final static String PREFIX="JIM-";
