@@ -28,4 +28,14 @@ public class CustomerController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<Integer> updateCustomer(@RequestBody CustomerVO customerVO) {
+        int i = customerService.updateCustomer(customerVO);
+        if (i == 1) {
+            return new ResponseEntity<>(i, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 }
