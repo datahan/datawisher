@@ -225,4 +225,23 @@ public class LocalTests {
         System.out.println(i + "====");
 
     }
+
+    @Test
+    public void nullList() {
+        List<String> strs = new ArrayList<>();
+        for (String str : strs) {
+            System.out.println(str);
+        }
+    }
+
+    @Test
+    public void addSet() {
+        Set<String> set = new HashSet<>();
+
+        set.add("a");
+        set.add("b");
+        set.add("a");
+        set.remove("a");
+        System.out.println(set);
+    }
 }
