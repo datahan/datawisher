@@ -18,46 +18,39 @@ import org.springframework.context.annotation.Import;
 import java.util.Collection;
 
 @Configuration
-@Import({ EndpointAutoConfiguration.class,
+@Import({EndpointAutoConfiguration.class,
         HealthIndicatorAutoConfiguration.class})
 public class ActuatorConfig {
 
     @Bean
     @Autowired
-    //Define the HandlerMapping similar to RequestHandlerMapping to expose the endpoint
     public EndpointHandlerMapping endpointHandlerMapping(
             Collection<? extends MvcEndpoint> endpoints
-    ){
+    ) {
         return new EndpointHandlerMapping(endpoints);
     }
 
     @Bean
     @Autowired
-    //define the HealthPoint endpoint
-    public HealthMvcEndpoint healthMvcEndpoint(HealthEndpoint delegate){
+    public HealthMvcEndpoint healthMvcEndpoint(HealthEndpoint delegate) {
         return new HealthMvcEndpoint(delegate, false);
     }
 
     @Bean
     @Autowired
-    //define the Info endpoint
-    public EndpointMvcAdapter infoMvcEndPoint(InfoEndpoint delegate){
+    public EndpointMvcAdapter infoMvcEndPoint(InfoEndpoint delegate) {
         return new EndpointMvcAdapter(delegate);
     }
 
     @Bean
     @Autowired
-    //define the beans endpoint
-    public EndpointMvcAdapter beansEndPoint(BeansEndpoint delegate){
+    public EndpointMvcAdapter beansEndPoint(BeansEndpoint delegate) {
         return new EndpointMvcAdapter(delegate);
     }
 
     @Bean
     @Autowired
-    //define the mappings endpoint
-    public EndpointMvcAdapter requestMappingEndPoint(
-            RequestMappingEndpoint delegate
-    ){
+    public EndpointMvcAdapter requestMappingEndPoint(RequestMappingEndpoint delegate) {
         return new EndpointMvcAdapter(delegate);
     }
 

@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
                          http://www.springframework.org/schema/context
@@ -13,4 +14,54 @@
     <context:component-scan base-package="com.datahan"/>
     <context:annotation-config/>
 
+    <bean id="jedisConnFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:use-pool="true"/>
+
+    <!-- redis template definition -->
+    <bean id="redisTemplate"
+          class="org.springframework.data.redis.core.RedisTemplate"
+          p:connection-factory-ref="jedisConnFactory"/>
+
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://localhost:3306/crashcourse?useSSL=false"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="name" value="ds_mysql"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="validationInterval" value="30000"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <property name="initialSize" value="10"/>
+        <property name="maxActive" value="40"/>
+        <property name="minIdle" value="10"/>
+        <property name="maxIdle" value="20"/>
+        <property name="maxWait" value="10000"/>
+        <property name="minEvictableIdleTimeMillis" value="30000"/>
+        <property name="logAbandoned" value="false"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="60"/>
+        <property name="jmxEnabled" value="true" />
+        <property name="jdbcInterceptors"
+                  value="ConnectionState;StatementCache" />
+    </bean>
+
+    <bean id="jmxExporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry
+                        key="org.apache.tomcat.jdbc.pool.jmx:name=dataSourceMBean,type=ConnectionPool"
+                        value="#{dataSource.getPool().getJmxPool()}"/>
+            </map>
+            <!-- 需要注意：jmx:name=dataSourceMBean，
+            如果有多个dataSources时建议此值与你的dataSource对应的数据库保持一致，便于监控和分析
+            -->
+            <!-- 如果有多个数据源，需要按照上述模式，依次添加 -->
+        </property>
+    </bean>
+
+    <import resource="rabbit-context.xml"/>
 </beans>
