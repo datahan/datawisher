@@ -25,10 +25,18 @@ public class BooleanLock {
 
         synchronized (this) {
             while (locked) {
-                if (!blockedList.contains(currentThread())) {
-                    blockedList.add(currentThread());
+                // 暂存当前线程
+                final Thread tempThread = currentThread();
+                try {
+                    if (!blockedList.contains(currentThread())) {
+                        blockedList.add(currentThread());
+                    }
+                    this.wait();
+                } catch (InterruptedException e) {
+                    // 避免被中断后，当前线程还在blockedList中，造成内存泄漏
+                    blockedList.remove(tempThread);
+                    e.printStackTrace();
                 }
-                this.wait();
             }
 
             blockedList.remove(currentThread);
@@ -53,6 +61,7 @@ public class BooleanLock {
                 long endMills = currentTimeMillis() + remainMills;
                 while (locked) {
                     if (remainMills <= 0) {
+                        blockedList.remove(currentThread());
                         throw new TimeoutException("can not get the lock during " + mills + " ms.");
                     }
                     if (!blockedList.contains(currentThread())) {
