@@ -1,4 +1,4 @@
-package jxls.demo.guide;
+package com.datawisher.excel.jxls.jxls.demo.guide;
 
 import java.math.BigDecimal;
 import java.util.Date;

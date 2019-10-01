@@ -1,6 +1,6 @@
-package jxls.demo.guide;
+package com.datawisher.excel.jxls.jxls.demo.guide;
 
-import common.utils.JxlsUtils;
+import com.datawisher.excel.jxls.common.utils.JxlsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
