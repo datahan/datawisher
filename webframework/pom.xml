@@ -11,6 +11,11 @@
 
     <modules>
         <module>section1</module>
+        <module>core</module>
+        <module>section3</module>
+        <module>section2</module>
+        <module>section5</module>
+        <module>web-plugin-security</module>
     </modules>
 
 </project>
